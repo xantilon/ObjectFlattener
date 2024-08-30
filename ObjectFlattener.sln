@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectFlattener", "ObjectFlattener\ObjectFlattener.csproj", "{9C1F1F81-2273-4F0B-8FEB-CD8CD1990364}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectFlattenerTests", "Tests\ObjectFlattenerTests.csproj", "{F882FE93-6BDB-4768-AAB7-EC9420AAB849}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C1F1F81-2273-4F0B-8FEB-CD8CD1990364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C1F1F81-2273-4F0B-8FEB-CD8CD1990364}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C1F1F81-2273-4F0B-8FEB-CD8CD1990364}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C1F1F81-2273-4F0B-8FEB-CD8CD1990364}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F882FE93-6BDB-4768-AAB7-EC9420AAB849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F882FE93-6BDB-4768-AAB7-EC9420AAB849}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F882FE93-6BDB-4768-AAB7-EC9420AAB849}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F882FE93-6BDB-4768-AAB7-EC9420AAB849}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C63E2CFB-8221-47CB-AFC8-F456917773AB}
+	EndGlobalSection
+EndGlobal
