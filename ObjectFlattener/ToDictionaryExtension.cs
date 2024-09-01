@@ -5,7 +5,7 @@ namespace ObjectFlattener
 {
     public static class ToDictionaryExtension
     {
-        public static Dictionary<string, string> Flatten<T>(this T obj) where T : new()
+        public static Dictionary<string, string> Flatten<T>(this T obj) where T : class
         {
             var dict = new Dictionary<string, string>();
             var properties = typeof(T).GetProperties();
