@@ -8,7 +8,7 @@ namespace ObjectFlattener
         public static Dictionary<string, string> Flatten<T>(this T obj) where T : new()
         {
             var dict = new Dictionary<string, string>();
-            var properties = typeof(T).GetProperties();
+            var properties = typeof(T).GetProperties().Where(p => p.GetIndexParameters().Length == 0);
             foreach(var property in properties)
             {
                 var value = property.GetValue(obj);
