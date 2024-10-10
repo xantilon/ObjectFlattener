@@ -22,8 +22,9 @@ namespace ObjectFlattenerTests
         }
     }
 
+	public record KSService(string name);
 
-    public class KSServiceDto
+	public class KSServiceDto
     {
         public KSServiceDto() { }
         

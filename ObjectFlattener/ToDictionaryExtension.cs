@@ -21,7 +21,15 @@ namespace ObjectFlattener
                         dict[kvp.Key] = kvp.Value;
                     }
                 }
-                else
+				else if(value is Dictionary<string, string> nestedDict)
+				{
+					var flattenedDict = nestedDict.FlattenDictionary(property.Name);
+					foreach(var kvp in flattenedDict)
+					{
+						dict[kvp.Key] = kvp.Value;
+					}
+				}
+				else
                 {
                     dict[property.Name] = value.ToString() ?? "";
                 }
@@ -53,7 +61,15 @@ namespace ObjectFlattener
                             dict[kvp.Key] = kvp.Value;
                         }
                     }
-                    else
+					else if(value is Dictionary<string, string> nestedDict)
+					{
+						var flattenedDict = nestedDict.FlattenDictionary(property.Name);
+						foreach(var kvp in flattenedDict)
+						{
+							dict[kvp.Key] = kvp.Value;
+						}
+					}
+					else
                     {
                         dict[$"{prefix}:{i}:{property.Name}"] = value.ToString() ?? "";
                     }
@@ -61,6 +77,7 @@ namespace ObjectFlattener
             }
             return dict;
         }
+
         private static Dictionary<string, string> FlattenNestedList(IList nestedList, string prefix)
         {
             var elementType = nestedList.GetType().GetGenericArguments()[0];
@@ -72,8 +89,18 @@ namespace ObjectFlattener
                 ?? throw new InvalidOperationException("Failed to invoke generic method"));
         }
 
+		public static Dictionary<string, string> FlattenDictionary(this Dictionary<string, string> dict, string prefix = "")
+		{
+			var flattenedDict = new Dictionary<string, string>();
+			foreach(var kvp in dict)
+			{
+				var key = string.IsNullOrEmpty(prefix) ? kvp.Key : $"{prefix}:{kvp.Key}";
+				flattenedDict[key] = kvp.Value;
+			}
+			return flattenedDict;
+		}
 
-        public static T Unflatten<T>(this Dictionary<string, string> dict) where T : new()
+		public static T Unflatten<T>(this Dictionary<string, string> dict) where T : new()
         {
             var item = new T();
             var properties = typeof(T).GetProperties();
@@ -86,6 +113,11 @@ namespace ObjectFlattener
                     var nestedList = UnflattenNestedList(dict, key, elementType);
                     property.SetValue(item, nestedList);
                 }
+                else if(typeof(Dictionary<string, string>).IsAssignableFrom(property.PropertyType)) 
+                {
+					var nestedList = UnflattenDictionary(dict, key);
+					property.SetValue(item, nestedList);
+				}
                 else if(dict.TryGetValue(key, out var value))
                 {
                     var convertedValue = Convert.ChangeType(value, property.PropertyType);
@@ -146,5 +178,16 @@ namespace ObjectFlattener
             return (IList)(genericMethod?.Invoke(null, new object[] { dict, prefix })
                 ?? throw new InvalidOperationException("Failed to invoke generic method"));
         }
-    }
+
+		public static Dictionary<string, string> UnflattenDictionary(this Dictionary<string, string> dict, string prefix = "")
+		{
+			var unflattenedDict = new Dictionary<string, string>();
+			foreach(var kvp in dict)
+			{
+				var key = string.IsNullOrEmpty(prefix) ? kvp.Key : kvp.Key.Replace($"{prefix}:", "");
+				unflattenedDict[key] = kvp.Value;
+			}
+			return unflattenedDict;
+		}
+	}
 }
