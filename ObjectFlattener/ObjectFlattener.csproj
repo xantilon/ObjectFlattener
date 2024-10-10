@@ -4,8 +4,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>1.0.40.24284</AssemblyVersion>
-    <FileVersion>1.0.40.24284</FileVersion>
+    <AssemblyVersion>1.0.63.24284</AssemblyVersion>
+    <FileVersion>1.0.63.24284</FileVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="bogus" Version="35.6.1" />
+  </ItemGroup>
 
 </Project>
